@@ -15,9 +15,6 @@ let humanScore = 0;
 let computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toLowerCase()
-    computerChoice = computerChoice.toLowerCase()
-
     if (humanChoice == "rock") {
         switch (computerChoice) {
             case "rock":
@@ -52,21 +49,27 @@ function playRound(humanChoice, computerChoice) {
                 break;
         }
     }
-
-    console.log(`You chose ${humanChoice}!\n
-Computer chose ${computerChoice}!`);
-    console.log(`You got ${humanScore} points!\n
-Computer got ${computerScore} points!`);
 }
 
-const buttons = document.querySelectorAll(".button")
+const buttons = document.querySelectorAll(".button");
+const container = document.querySelector(".container");
+const div = document.createElement("div");
 
-buttons.forEach(
-    (button) => {
-        button.addEventListener("click",
-            () => {
-                alert(button.id)
-            }
-        )
-    }
-)
+div.textContent = "Choose an option!";
+div.setAttribute("style",
+    "white-space: pre-wrap;\
+    text-align: center;"
+);
+container.appendChild(div);
+
+
+let computerChoice = "";
+buttons.forEach(button => {
+    button.addEventListener("click", () => computerChoice  = getComputerChoice())
+    button.addEventListener("click", (e) => playRound(e.target.id, computerChoice))
+    button.addEventListener("click", (e) => div.textContent = `You chose ${e.target.id}!
+Computer chose ${computerChoice}!
+
+Your Score: ${humanScore}
+Computer Score: ${computerScore}`)
+});
