@@ -48,7 +48,16 @@ function playRound(humanChoice, computerChoice) {
             case "scissors":
                 break;
         }
-    }
+    };
+
+    if (humanScore == 5 || computerScore == 5) {
+        humanScore = 0, computerScore = 0
+        if (humanScore == 5) {
+            alert("You Win!")
+        } else {
+            alert("You Lose.")
+        }
+    };
 }
 
 const buttons = document.querySelectorAll(".button");
